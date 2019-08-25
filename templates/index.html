@@ -1,0 +1,36 @@
+{% import "bootstrap/wtf.html" as wtf %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>RSS Picker</title>
+</head>
+<body>
+    <h1>Wellcome</h1></br>
+    <div class="row">
+      <div class="col-md-6 col-xs-12">
+         <ol>
+            {% for page in pages %}
+            <li>{{page}} <button class='btn badge badge-pill badge-secondary' onClick="window.location='/del/{{page}}'">X</button></li>
+            {% endfor %}   
+         </ol>
+      </div>
+      <div class="col-md-6 col-xs-12">
+         <form class="form form-horizontal" method="post" role="form">
+            {{ form.hidden_tag() }}
+            {{ wtf.form_errors(form, hiddens="only") }}
+            <div class="row">
+               <div class="input-group col-6">
+                  {{ wtf.form_field(form.page, class="form-control", placeholder='https://example.blog/feed/', size=30) }}
+               {{ wtf.form_field(form.submit, class="btn btn-sm btn-outline-primary") }}
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+</body>
+</html>
